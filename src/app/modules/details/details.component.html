@@ -1,0 +1,27 @@
+@if (user$ | async; as user) {
+  <div
+    class="container mt-5 mx-auto"
+    style="width: 50%;"
+  >
+    <div class="card">
+      <img
+        [src]="user?.avatar_url"
+        class="card-img-top"
+        alt="{{ user?.login }}"
+      >
+      <div class="card-body">
+        <h5 class="card-title">Login: {{ user?.login }}</h5>
+        <p class="card-text">User Type: {{ user?.type }}</p>
+        <a
+          [href]="user?.html_url"
+          class="btn btn-primary"
+          target="_blank"
+        >View Profile on GitHub</a>
+      </div>
+    </div>
+  </div>
+} @else {
+  <div class="container mt-5">
+    <h1>User not found</h1>
+  </div>
+}
