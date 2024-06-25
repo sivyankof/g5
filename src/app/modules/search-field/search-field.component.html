@@ -1,0 +1,35 @@
+<form
+  [formGroup]="searchForm"
+  (ngSubmit)="onSubmit()"
+>
+  <div class="input-group mb-3">
+    <input
+      type="text"
+      class="form-control"
+      formControlName="searchTerm"
+      placeholder="Search for GitHub users"
+      aria-label="Search for GitHub users"
+      aria-describedby="button-search"
+    />
+    <button
+      class="btn btn-primary"
+      type="submit"
+      id="button-search"
+      [disabled]="isLoading"
+    >
+      Search
+    </button>
+  </div>
+</form>
+
+@if (isLoading) {
+  <app-spinner/>
+}
+
+@if (error) {
+  <div
+    class="alert alert-danger"
+  >
+    {{ error }}
+  </div>
+}

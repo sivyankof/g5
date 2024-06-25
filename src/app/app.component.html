@@ -1,0 +1,16 @@
+<ul
+  ngbNav
+  [activeId]="route.fragment | async"
+  class="nav-tabs"
+>
+  @for (link of links; track link) {
+    <li [ngbNavItem]="link.path">
+      <a
+        ngbNavLink
+        [routerLink]="link.path"
+      >{{ link.title }}</a>
+    </li>
+  }
+</ul>
+
+<router-outlet></router-outlet>

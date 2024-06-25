@@ -1,0 +1,29 @@
+<div class="container mt-5">
+  <h1>GitHub users Search</h1>
+  <app-search-field (onNameChange)="users = $event"></app-search-field>
+
+  @if (users.length > 0) {
+    <div
+      class="row"
+    >
+      @for (user of users; track user?.id) {
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <img
+              [src]="user.avatar_url"
+              class="card-img-top"
+              alt="{{ user.login }}"
+            >
+            <div class="card-body">
+              <h5 class="card-title">{{ user.login }}</h5>
+              <a
+                [routerLink]="['/details', user.id]"
+                class="btn btn-primary"
+              >View Profile</a>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>
