@@ -1,46 +1,34 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { RouterOutlet, RouterLink, ActivatedRoute } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { RouterOutlet, RouterLink, ActivatedRoute, Router } from '@angular/router';
 import { NgbNavOutlet, NgbNavItem, NgbNav, NgbNavLinkButton, NgbNavContent, NgbNavLink } from '@ng-bootstrap/ng-bootstrap';
 import { AsyncPipe } from '@angular/common';
 import { LINKS_ROUTE } from './shared/constants/links-route.constants';
-import { ILinks } from './interfaces/links.interface';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { GithubAuthProvider } from '@angular/fire/auth';
+import { ILinks } from './shared/interfaces/links.interface';
+import { AuthService } from './services/auth.service';
+import { take, catchError, of } from 'rxjs';
+import { UserInfoComponent } from './modules/user-info/user-info.component';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, NgbNavOutlet, NgbNavItem, NgbNav, NgbNavLinkButton, NgbNavContent, AsyncPipe, NgbNavLink],
+  imports: [RouterOutlet, RouterLink, NgbNavOutlet, NgbNavItem, NgbNav, NgbNavLinkButton, NgbNavContent, AsyncPipe, NgbNavLink, UserInfoComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   route = inject(ActivatedRoute);
-  title = 'g5';
+  router = inject(Router);
+  auth = inject(AuthService);
+  isUserLoggedIn$ = this.auth.getCurrentUser().pipe(catchError(() => of(null)));
 
   links: ILinks[] = LINKS_ROUTE;
 
-  constructor(
-    public afAuth: AngularFireAuth,
-  ) {
-  }
 
-  ngOnInit() {
-    this.doGitHubLogin();
-
-  }
-
-  doGitHubLogin() {
-    return this.authLogin(new GithubAuthProvider());
-  }
-
-  private async authLogin(provider: any) {
-    try {
-      const result = await this.afAuth
-        .signInWithRedirect(provider);
-      console.log('You have been successfully logged in!');
-    } catch (error) {
-      console.log(error);
-    }
+  public logout() {
+    this.auth.doLogout().pipe(take(1)).subscribe(() => {
+      console.log('You have been successfully logged out!');
+      this.router.navigate(['/login']);
+    });
   }
 }

@@ -1,7 +1,7 @@
 import { Component, output, DestroyRef, inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { SpinnerComponent } from '../spinner/spinner.component';
-import { BlockApiService } from '../../services/block-api.service';
+import { BlockApiService } from '../../../services/block-api.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { IBlock } from '../../interfaces/block.interface';
 

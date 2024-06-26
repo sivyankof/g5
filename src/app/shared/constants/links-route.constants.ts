@@ -1,4 +1,4 @@
-import { ILinks } from '../../interfaces/links.interface';
+import { ILinks } from '../interfaces/links.interface';
 
 export const LINKS_ROUTE: ILinks[] = [
   {

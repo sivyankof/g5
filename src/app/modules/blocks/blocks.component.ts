@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { IBlock } from '../../interfaces/block.interface';
-import { SearchFieldComponent } from '../search-field/search-field.component';
+import { IBlock } from '../../shared/interfaces/block.interface';
+import { SearchFieldComponent } from '../../shared/components/search-field/search-field.component';
 
 @Component({
   selector: 'app-blocks',

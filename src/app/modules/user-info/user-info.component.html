@@ -1,0 +1,16 @@
+<div class="container mt-1">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4 mb-3">
+      <div class="card d-flex align-items-center p-3">
+        <img
+          [src]="isUserLoggedIn?.photoURL"
+          class="rounded-circle me-3"
+          alt="{{ isUserLoggedIn?.displayName || isUserLoggedIn?.email }}"
+          width="50"
+          height="50"
+        >
+        <h5 class="mb-0">{{ isUserLoggedIn?.displayName || isUserLoggedIn?.email }}</h5>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,16 +1,26 @@
-<ul
-  ngbNav
-  [activeId]="route.fragment | async"
-  class="nav-tabs"
->
-  @for (link of links; track link) {
-    <li [ngbNavItem]="link.path">
-      <a
-        ngbNavLink
-        [routerLink]="link.path"
-      >{{ link.title }}</a>
-    </li>
-  }
-</ul>
+@if (isUserLoggedIn$ | async; as isUserLoggedIn) {
+  <ul
+    ngbNav
+    [activeId]="route.fragment | async"
+    class="nav-tabs"
+  >
+    @for (link of links; track link) {
+      <li [ngbNavItem]="link.path">
+        <a
+          ngbNavLink
+          [routerLink]="link.path"
+        >{{ link.title }}</a>
+      </li>
+    }
+  </ul>
+
+  <app-user-info [isUserLoggedIn]="isUserLoggedIn"></app-user-info>
+
+  <button
+    class="btn btn-primary"
+    (click)="logout()"
+  >Logout
+  </button>
+}
 
 <router-outlet></router-outlet>

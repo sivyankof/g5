@@ -1,15 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
-import { IBlockResponse, IBlock } from '../interfaces/block.interface';
-import { BASE_URL } from './base-url.constants';
+import { IBlockResponse, IBlock } from '../shared/interfaces/block.interface';
+import { BASE_URL } from '../shared/constants/base-url.constants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BlockApiService {
-  constructor(private http: HttpClient) {
-  }
+  http = inject(HttpClient);
 
   getBlocks(user: string = ''): Observable<IBlock[]> {
     return this.http.get<IBlockResponse>(`${ BASE_URL }/search/users?q=${ user }&per_page=20&page=1`)

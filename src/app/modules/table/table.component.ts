@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IBlock } from '../../interfaces/block.interface';
-import { SearchFieldComponent } from '../search-field/search-field.component';
+import { IBlock } from '../../shared/interfaces/block.interface';
+import { SearchFieldComponent } from '../../shared/components/search-field/search-field.component';
 import { RouterLink } from '@angular/router';
 
 @Component({
